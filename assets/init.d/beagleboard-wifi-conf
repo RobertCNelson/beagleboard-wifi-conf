@@ -1,8 +1,8 @@
 #! /bin/sh
-# /etc/init.d/raspberry-wifi-conf
+# /etc/init.d/beagleboard-wifi-conf
 
 ### BEGIN INIT INFO
-# Provides:          raspberry-wifi-conf
+# Provides:          beagleboard-wifi-conf
 # Required-Start:    $local_fs $syslog $network
 # Required-Stop:     $local_fs $syslog
 # Default-Start:     2 3 4 5
@@ -14,14 +14,14 @@
 # Carry out specific functions when asked to by the system
 case "$1" in
   start)
-    echo "Starting raspberry-wifi-conf service"
-    cd /home/pi/raspberry-wifi-conf
+    echo "Starting beagleboard-wifi-conf service"
+    cd /home/debian/beagleboard-wifi-conf
     sudo /usr/bin/node server.js &
     echo $! > node.pid
     ;;
   stop)
-    echo "Stopping raspberry-wifi-conf service"
-    PIDFile=/home/pi/raspberry-wifi-conf/node.pid
+    echo "Stopping beagleboard-wifi-conf service"
+    PIDFile=/home/debian/beagleboard-wifi-conf/node.pid
     if [ -f $PIDFile ]; then
         sudo kill -9 $(cat $PIDFile)
         sudo kill -9 $(($(cat $PIDFile) + 1))
@@ -29,7 +29,7 @@ case "$1" in
     fi
     ;;
   *)
-    echo "Usage: /etc/init.d/raspberry-wifi-conf {start|stop}"
+    echo "Usage: /etc/init.d/beagleboard-wifi-conf {start|stop}"
     exit 1
     ;;
 esac
